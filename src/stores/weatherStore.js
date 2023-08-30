@@ -41,8 +41,11 @@ export const useWeatherStore = defineStore("weather", {
     },
   },
   getters: {
-    city: (state) => {
-      return state.weatherInfo.city;
+    location: (state) => {
+      return {
+        city: state.weatherInfo.city.name,
+        country: state.weatherInfo.city.country,
+      };
     },
     currentWeather: (state) => {
       return state.weatherInfo.list[0];
