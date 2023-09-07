@@ -51,7 +51,7 @@ export const useWeatherStore = defineStore("weather", {
       return state.weatherInfo.list[0];
     },
     weatherList: (state) => {
-      return state.weatherInfo;
+      return state.weatherInfo.list;
     },
   },
 });

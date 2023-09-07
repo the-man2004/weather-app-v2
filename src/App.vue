@@ -5,6 +5,7 @@
   <div v-if="!store.isFetching">
     <div>
       <CurrentWeather />
+      <AllWeather />
     </div>
   </div>
   <div v-else>
@@ -18,6 +19,7 @@ import { useWeatherStore } from "./stores/weatherStore";
 
 import TheHeader from "./components/TheHeader.vue";
 import CurrentWeather from "./components/CurrentWeather.vue";
+import AllWeather from "./components/AllWeather.vue";
 
 export default {
   // "04400c94c3fa39734684083c69ac10aa"
@@ -26,6 +28,7 @@ export default {
   components: {
     TheHeader,
     CurrentWeather,
+    AllWeather,
   },
   setup() {
     const store = useWeatherStore();
