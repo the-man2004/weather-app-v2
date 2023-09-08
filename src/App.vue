@@ -5,6 +5,7 @@
   <div v-if="!store.isFetching">
     <div>
       <CurrentWeather />
+      <p>-------------------</p>
       <AllWeather />
     </div>
   </div>

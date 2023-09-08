@@ -5,8 +5,8 @@
   <div>
     <img :src="icon" alt="weather icon" />
     <h3>{{ temp }}°C</h3>
-    <p>wind speed: {{ wind }}km/h</p>
-    <p>{{ description }}</p>
+    <p>Humidity: {{ humidity }}%</p>
+    <p>Wind: {{ wind }} km/h</p>
   </div>
 </template>
 
@@ -19,20 +19,20 @@ export default {
     const store = useWeatherStore();
 
     const temp = computed(() => Math.round(store.currentWeather.main.temp));
-    const description = computed(
-      () => store.currentWeather.weather[0].description
+    // const description = computed(
+    //   () => store.currentWeather.weather[0].description
+    // );
+    const humidity = computed(() => store.currentWeather.main.humidity);
+    const wind = computed(() => Math.round(store.currentWeather.wind.speed));
+    const icon = computed(
+      () =>
+        `http://openweathermap.org/img/w/${store.currentWeather.weather[0].icon}.png`
     );
-    const wind = computed(() => store.currentWeather.wind.speed);
-    const icon = computed(() => {
-      const i = `http://openweathermap.org/img/w/${store.currentWeather.weather[0].icon}.png`;
-
-      return i;
-    });
 
     return {
       store,
       temp,
-      description,
+      humidity,
       wind,
       icon,
     };

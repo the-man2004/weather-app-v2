@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul>
-      <WeatherList
+      <WeatherItem
         v-for="weather in weatherList"
         :key="weather.dt"
         :info="weather"
@@ -13,11 +13,11 @@
 <script>
 import { ref } from "vue";
 import { useWeatherStore } from "../stores/weatherStore";
-import WeatherList from "./WeatherList.vue";
+import WeatherItem from "./WeatherItem.vue";
 
 export default {
   components: {
-    WeatherList,
+    WeatherItem,
   },
   setup() {
     const store = useWeatherStore();
