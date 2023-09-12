@@ -2,7 +2,7 @@
   <div>
     <TheHeader />
   </div>
-  <div v-if="!store.isFetching">
+  <div v-if="!store.isFetching && !store.error">
     <div>
       <CurrentWeather />
       <p>-------------------</p>
@@ -10,6 +10,11 @@
     </div>
   </div>
   <div v-else>
+    <h2>
+      {{ store.error }}
+    </h2>
+  </div>
+  <div v-if="store.isFetching">
     <p>Loading...</p>
   </div>
 </template>
@@ -36,6 +41,8 @@ export default {
 
     onMounted(() => {
       navigator.geolocation.getCurrentPosition(store.setPosition);
+
+      // setTimeout(() => store.fetchData("cityName"), 5000);
     });
 
     return {

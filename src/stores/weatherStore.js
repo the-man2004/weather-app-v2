@@ -7,6 +7,7 @@ export const useWeatherStore = defineStore("weather", {
       longitude: null,
       isFetching: true,
       weatherInfo: null,
+      error: null,
     };
   },
   actions: {
@@ -16,26 +17,40 @@ export const useWeatherStore = defineStore("weather", {
 
       this.fetchData();
     },
-    async fetchData() {
+    async fetchData(mode = "coords", city = "london") {
       this.isFetching = true;
 
+      let APIUrl;
+
+      if (mode === "coords") {
+        APIUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${this.latitude}&lon=${this.longitude}&cnt=8&appid=04400c94c3fa39734684083c69ac10aa&units=metric`;
+      }
+
+      if (mode === "cityName") {
+        APIUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&cnt=8&appid=04400c94c3fa39734684083c69ac10aa&units=metric`;
+      }
+
       try {
-        const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/forecast?lat=${this.latitude}&lon=${this.longitude}&cnt=8&appid=04400c94c3fa39734684083c69ac10aa&units=metric`
-        );
+        const response = await fetch(APIUrl);
+
+        if (!response.ok) {
+          console.log(response);
+          throw new Error();
+        }
+
         const responseData = await response.json();
         console.log(responseData);
 
         this.weatherInfo = {
           ...responseData,
         };
-        // this.weatherInfo = {
-        //   status: "FUCKED",
-        // };
 
         this.isFetching = false;
       } catch (err) {
         console.log(err);
+
+        this.error = "Something went wrong!";
+
         this.isFetching = false;
       }
     },

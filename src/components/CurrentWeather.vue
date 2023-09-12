@@ -1,5 +1,6 @@
 <template>
   <h1>
+    <!-- {{ store.location.city }} <span>{{ store.location.country }}</span> -->
     {{ store.location.city }} <span>{{ store.location.country }}</span>
   </h1>
   <div>

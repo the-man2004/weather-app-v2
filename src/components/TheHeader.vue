@@ -6,17 +6,24 @@
 </template>
 
 <script>
+import { useWeatherStore } from "../stores/weatherStore";
 import { ref } from "vue";
 
 export default {
   setup() {
+    const store = useWeatherStore();
     const cityName = ref("");
 
     const searchCity = () => {
+      store.fetchData("cityName", cityName.value);
+
       console.log(cityName.value);
+
+      cityName.value = "";
     };
 
     return {
+      store,
       searchCity,
       cityName,
     };
