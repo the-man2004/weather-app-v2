@@ -1,13 +1,13 @@
 <template>
   <h1>
-    <!-- {{ store.location.city }} <span>{{ store.location.country }}</span> -->
-    {{ store.location.city }} <span>{{ store.location.country }}</span>
+    {{ store.location.city }}, <span>{{ store.location.country }}</span>
   </h1>
   <div>
     <img :src="icon" alt="weather icon" />
     <h3>{{ temp }}°C</h3>
     <p>Humidity: {{ humidity }}%</p>
     <p>Wind: {{ wind }} km/h</p>
+    <img class="weather-img" :src="imageUrl" alt="" />
   </div>
 </template>
 
@@ -29,6 +29,13 @@ export default {
       () =>
         `http://openweathermap.org/img/w/${store.currentWeather.weather[0].icon}.png`
     );
+    const imageUrl = computed(() => {
+      const imageName = store.currentWeather.weather[0].description
+        .split(" ")
+        .join("-");
+
+      return `../../assets/${imageName}.jpg`;
+    });
 
     return {
       store,
@@ -36,7 +43,14 @@ export default {
       humidity,
       wind,
       icon,
+      imageUrl,
     };
   },
 };
 </script>
+
+<style scoped>
+.weather-img {
+  max-width: 100%;
+}
+</style>

@@ -2,7 +2,7 @@
   <div>
     <TheHeader />
   </div>
-  <div v-if="!store.isFetching && !store.error">
+  <div v-if="!store.isFetching && !store.error" class="weather">
     <div>
       <CurrentWeather />
       <p>-------------------</p>
@@ -61,5 +61,10 @@ export default {
 
 svg {
   width: 1.2rem;
+}
+
+.weather {
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 </style>

@@ -45,12 +45,12 @@ export const useWeatherStore = defineStore("weather", {
           ...responseData,
         };
 
+        this.error = null;
         this.isFetching = false;
       } catch (err) {
         console.log(err);
 
         this.error = "Something went wrong!";
-
         this.isFetching = false;
       }
     },
