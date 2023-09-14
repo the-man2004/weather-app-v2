@@ -8,6 +8,7 @@ export const useWeatherStore = defineStore("weather", {
       isFetching: true,
       weatherInfo: null,
       error: null,
+      day: null,
     };
   },
   actions: {
@@ -16,6 +17,9 @@ export const useWeatherStore = defineStore("weather", {
       this.longitude = position.coords.longitude;
 
       this.fetchData();
+    },
+    setDay(day) {
+      this.day = day;
     },
     async fetchData(mode = "coords", city = "london") {
       this.isFetching = true;
@@ -67,6 +71,12 @@ export const useWeatherStore = defineStore("weather", {
     },
     weatherList: (state) => {
       return state.weatherInfo.list;
+    },
+    currentTime: (state) => {
+      return state.weatherInfo.list[0].dt_txt;
+    },
+    weatherCondition: (state) => {
+      return state.weatherInfo.list[0].weather[0].description;
     },
   },
 });

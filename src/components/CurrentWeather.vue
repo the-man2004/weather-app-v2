@@ -1,13 +1,17 @@
 <template>
-  <h1>
-    {{ store.location.city }}, <span>{{ store.location.country }}</span>
-  </h1>
+  <h1>{{ store.location.city }}, {{ store.location.country }}</h1>
   <div>
     <img :src="icon" alt="weather icon" />
     <h3>{{ temp }}°C</h3>
     <p>Humidity: {{ humidity }}%</p>
     <p>Wind: {{ wind }} km/h</p>
-    <img class="weather-img" :src="imageUrl" alt="" />
+    <!-- <img class="weather-img" :src="imageUrl" alt="" /> -->
+  </div>
+  <div>
+    <p>-------------------</p>
+    <h3>Weather</h3>
+    <p>{{ day }} {{ time }}</p>
+    <p>{{ store.weatherCondition }}</p>
   </div>
 </template>
 
@@ -36,6 +40,12 @@ export default {
 
       return `../../assets/${imageName}.jpg`;
     });
+    const day = computed(() => store.day);
+    const time = computed(() => {
+      const t = store.currentTime.split(" ");
+
+      return t[1].slice(0, 5);
+    });
 
     return {
       store,
@@ -44,6 +54,8 @@ export default {
       wind,
       icon,
       imageUrl,
+      day,
+      time,
     };
   },
 };

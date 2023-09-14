@@ -42,7 +42,21 @@ export default {
     onMounted(() => {
       navigator.geolocation.getCurrentPosition(store.setPosition);
 
-      // setTimeout(() => store.fetchData("cityName"), 5000);
+      const days = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
+
+      const d = new Date();
+      const day = days[d.getDay()];
+      console.log(day);
+
+      store.setDay(day);
     });
 
     return {

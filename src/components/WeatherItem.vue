@@ -20,7 +20,7 @@ export default {
       return i;
     });
     const timeStr = computed(() => {
-      const t = props.info["dt_txt"].split(" ");
+      const t = props.info.dt_txt.split(" ");
       let time = t[1].slice(0, 5);
 
       return time;
