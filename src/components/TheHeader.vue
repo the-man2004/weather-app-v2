@@ -13,11 +13,13 @@ const store = useWeatherStore();
 const cityName = ref("");
 
 const searchCity = () => {
-  store.resetError();
-  store.fetchData("cityName", cityName.value);
+  if (cityName.value !== "") {
+    store.resetError();
+    store.fetchData("cityName", cityName.value);
 
-  console.log(cityName.value);
+    console.log(cityName.value);
 
-  cityName.value = "";
+    cityName.value = "";
+  }
 };
 </script>
