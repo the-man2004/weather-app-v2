@@ -21,6 +21,9 @@ export const useWeatherStore = defineStore("weather", {
     setDay(day) {
       this.day = day;
     },
+    resetError() {
+      this.error = null;
+    },
     async fetchData(mode = "coords", city = "london") {
       this.isFetching = true;
 
@@ -49,7 +52,7 @@ export const useWeatherStore = defineStore("weather", {
           ...responseData,
         };
 
-        this.error = null;
+        this.resetError();
         this.isFetching = false;
       } catch (err) {
         console.log(err);

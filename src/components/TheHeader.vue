@@ -15,6 +15,7 @@ export default {
     const cityName = ref("");
 
     const searchCity = () => {
+      store.resetError();
       store.fetchData("cityName", cityName.value);
 
       console.log(cityName.value);
