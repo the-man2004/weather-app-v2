@@ -5,29 +5,19 @@
   </form>
 </template>
 
-<script>
+<script setup>
 import { useWeatherStore } from "../stores/weatherStore";
 import { ref } from "vue";
 
-export default {
-  setup() {
-    const store = useWeatherStore();
-    const cityName = ref("");
+const store = useWeatherStore();
+const cityName = ref("");
 
-    const searchCity = () => {
-      store.resetError();
-      store.fetchData("cityName", cityName.value);
+const searchCity = () => {
+  store.resetError();
+  store.fetchData("cityName", cityName.value);
 
-      console.log(cityName.value);
+  console.log(cityName.value);
 
-      cityName.value = "";
-    };
-
-    return {
-      store,
-      searchCity,
-      cityName,
-    };
-  },
+  cityName.value = "";
 };
 </script>

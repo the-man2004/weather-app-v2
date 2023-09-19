@@ -10,25 +10,13 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref } from "vue";
 import { useWeatherStore } from "../stores/weatherStore";
 import WeatherItem from "./WeatherItem.vue";
 
-export default {
-  components: {
-    WeatherItem,
-  },
-  setup() {
-    const store = useWeatherStore();
+const store = useWeatherStore();
 
-    const weatherList = ref(store.weatherList);
-    console.log("💥", weatherList.value);
-
-    return {
-      store,
-      weatherList,
-    };
-  },
-};
+const weatherList = ref(store.weatherList);
+console.log("💥", weatherList.value);
 </script>

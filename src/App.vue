@@ -19,7 +19,7 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { onMounted } from "vue";
 import { useWeatherStore } from "./stores/weatherStore";
 
@@ -27,43 +27,31 @@ import TheHeader from "./components/TheHeader.vue";
 import CurrentWeather from "./components/CurrentWeather.vue";
 import AllWeather from "./components/AllWeather.vue";
 
-export default {
-  // "04400c94c3fa39734684083c69ac10aa"
-  // "https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}"
-  // HOW TO GET ICON <img src="http://openweathermap.org/img/w/01d.png" alt="" />
-  components: {
-    TheHeader,
-    CurrentWeather,
-    AllWeather,
-  },
-  setup() {
-    const store = useWeatherStore();
+// "04400c94c3fa39734684083c69ac10aa"
+// "https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}"
+// HOW TO GET ICON <img src="http://openweathermap.org/img/w/01d.png" alt="" />
 
-    onMounted(() => {
-      navigator.geolocation.getCurrentPosition(store.setPosition);
+const store = useWeatherStore();
 
-      const days = [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-      ];
+onMounted(() => {
+  navigator.geolocation.getCurrentPosition(store.setPosition);
 
-      const d = new Date();
-      const day = days[d.getDay()];
-      console.log(day);
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
 
-      store.setDay(day);
-    });
+  const d = new Date();
+  const day = days[d.getDay()];
+  console.log(day);
 
-    return {
-      store,
-    };
-  },
-};
+  store.setDay(day);
+});
 </script>
 
 <style>

@@ -8,31 +8,25 @@
   </li>
 </template>
 
-<script>
+<script setup>
 import { computed } from "vue";
 
-export default {
-  props: ["info"],
-  setup(props) {
-    const temp = computed(() => Math.round(props.info.main.temp));
-    const icon = computed(() => {
-      const i = `http://openweathermap.org/img/w/${props.info.weather[0].icon}.png`;
-      return i;
-    });
-    const timeStr = computed(() => {
-      const t = props.info.dt_txt.split(" ");
-      let time = t[1].slice(0, 5);
+// eslint-disable-next-line
+const props = defineProps({
+  info: String,
+});
+const temp = computed(() => Math.round(props.info.main.temp));
+const icon = computed(() => {
+  const i = `http://openweathermap.org/img/w/${props.info.weather[0].icon}.png`;
+  return i;
+});
 
-      return time;
-    });
+const timeStr = computed(() => {
+  const t = props.info.dt_txt.split(" ");
+  let time = t[1].slice(0, 5);
 
-    console.log(icon.value);
+  return time;
+});
 
-    return {
-      temp,
-      icon,
-      timeStr,
-    };
-  },
-};
+console.log(icon.value);
 </script>

@@ -15,50 +15,33 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { useWeatherStore } from "../stores/weatherStore";
 import { computed } from "vue";
 
-export default {
-  setup() {
-    const store = useWeatherStore();
+const store = useWeatherStore();
 
-    const temp = computed(() => Math.round(store.currentWeather.main.temp));
-    // const description = computed(
-    //   () => store.currentWeather.weather[0].description
-    // );
-    const humidity = computed(() => store.currentWeather.main.humidity);
-    const wind = computed(() => Math.round(store.currentWeather.wind.speed));
-    const icon = computed(
-      () =>
-        `http://openweathermap.org/img/w/${store.currentWeather.weather[0].icon}.png`
-    );
-    const imageUrl = computed(() => {
-      const imageName = store.currentWeather.weather[0].description
-        .split(" ")
-        .join("-");
+const temp = computed(() => Math.round(store.currentWeather.main.temp));
+const humidity = computed(() => store.currentWeather.main.humidity);
+const wind = computed(() => Math.round(store.currentWeather.wind.speed));
+const icon = computed(
+  () =>
+    `http://openweathermap.org/img/w/${store.currentWeather.weather[0].icon}.png`
+);
+// eslint-disable-next-line
+const imageUrl = computed(() => {
+  const imageName = store.currentWeather.weather[0].description
+    .split(" ")
+    .join("-");
 
-      return `../../assets/${imageName}.jpg`;
-    });
-    const day = computed(() => store.day);
-    const time = computed(() => {
-      const t = store.currentTime.split(" ");
+  return `../../assets/${imageName}.jpg`;
+});
+const day = computed(() => store.day);
+const time = computed(() => {
+  const t = store.currentTime.split(" ");
 
-      return t[1].slice(0, 5);
-    });
-
-    return {
-      store,
-      temp,
-      humidity,
-      wind,
-      icon,
-      imageUrl,
-      day,
-      time,
-    };
-  },
-};
+  return t[1].slice(0, 5);
+});
 </script>
 
 <style scoped>
