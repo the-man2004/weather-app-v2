@@ -1,8 +1,15 @@
 <template>
-  <form @submit.prevent="searchCity">
-    <input type="text" placeholder="search city..." v-model.trim="cityName" />
-    <button>search</button>
-  </form>
+  <div class="py-5">
+    <form class="" @submit.prevent="searchCity">
+      <input
+        class="outline-none"
+        type="text"
+        placeholder="search city..."
+        v-model.trim="cityName"
+      />
+      <button>search</button>
+    </form>
+  </div>
 </template>
 
 <script setup>
