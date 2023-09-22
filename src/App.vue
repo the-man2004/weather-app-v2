@@ -1,12 +1,11 @@
 <template>
-  <main class="container mx-auto px-5 max-w-3xl">
+  <main class="container mx-auto mb-10 px-5 max-w-3xl text-gray-500">
     <div>
       <TheHeader />
     </div>
     <div v-if="!store.isFetching && !store.error" class="weather">
       <div>
         <CurrentWeather />
-        <p>-------------------</p>
         <AllWeather />
       </div>
     </div>
