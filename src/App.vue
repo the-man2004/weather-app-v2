@@ -1,5 +1,5 @@
 <template>
-  <main class="container mx-auto px-5">
+  <main class="container mx-auto px-5 max-w-3xl">
     <div>
       <TheHeader />
     </div>
