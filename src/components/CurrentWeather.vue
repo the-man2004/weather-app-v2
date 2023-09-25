@@ -1,17 +1,25 @@
 <template>
-  <h1>{{ store.location.city }}, {{ store.location.country }}</h1>
-  <div>
-    <img :src="icon" alt="weather icon" />
-    <h3>{{ temp }}°C</h3>
-    <p>Humidity: {{ humidity }}%</p>
-    <p>Wind: {{ wind }} km/h</p>
-    <!-- <img class="weather-img" :src="imageUrl" alt="" /> -->
-  </div>
-  <div>
-    <p>-------------------</p>
-    <h3>Weather</h3>
-    <p>{{ day }} {{ time }}</p>
-    <p>{{ store.weatherCondition }}</p>
+  <div
+    class="text-center text-base font-semibold mt-10 mb-20 md:mt-16 md:mb-24 md:text-xl"
+  >
+    <h1 class="text-3xl text-center md:text-5xl xl:text-7xl">
+      {{ store.location.city }}, {{ store.location.country }}
+    </h1>
+    <div class="">
+      <img class="mx-auto w-1/4" :src="icon" alt="weather icon" />
+
+      <div class="mb-3 md:mb-5">
+        <h3>{{ temp }}°C</h3>
+        <p>Humidity: {{ humidity }}%</p>
+        <p>Wind: {{ wind }} km/h</p>
+        <!-- <img class="weather-img" :src="imageUrl" alt="" /> -->
+      </div>
+      <div>
+        <h3>Weather</h3>
+        <p>{{ day }} {{ time }}</p>
+        <p>{{ store.weatherCondition }}</p>
+      </div>
+    </div>
   </div>
 </template>
 

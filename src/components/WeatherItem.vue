@@ -1,9 +1,9 @@
 <template>
-  <li>
-    <div>
+  <li class="font-semibold py-2">
+    <div class="text-center">
       <p>{{ timeStr }}</p>
-      <img :src="icon" alt="weather icon" />
-      <p>{{ temp }}°C</p>
+      <img class="w-14" :src="icon" alt="weather icon" />
+      <p class="text-lg">{{ temp }}°C</p>
     </div>
   </li>
 </template>

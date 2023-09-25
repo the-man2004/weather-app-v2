@@ -1,22 +1,23 @@
 <template>
-  <div>
-    <TheHeader />
-  </div>
-  <div v-if="!store.isFetching && !store.error" class="weather">
+  <main class="container mx-auto mb-10 px-5 max-w-3xl text-gray-500">
     <div>
-      <CurrentWeather />
-      <p>-------------------</p>
-      <AllWeather />
+      <TheHeader />
     </div>
-  </div>
-  <div v-else>
-    <h2>
-      {{ store.error }}
-    </h2>
-  </div>
-  <div v-if="store.isFetching">
-    <p>Loading...</p>
-  </div>
+    <div v-if="!store.isFetching && !store.error" class="weather">
+      <div>
+        <CurrentWeather />
+        <AllWeather />
+      </div>
+    </div>
+    <div v-else>
+      <h2 class="text-center text-1xl mt-10 text-red-500 md:text-3xl">
+        {{ store.error }}
+      </h2>
+    </div>
+    <div class="text-center text-lg md:text-2xl" v-if="store.isFetching">
+      <p>Loading...</p>
+    </div>
+  </main>
 </template>
 
 <script setup>
