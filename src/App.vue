@@ -34,8 +34,12 @@ import AllWeather from "./components/AllWeather.vue";
 
 const store = useWeatherStore();
 
+function handleGeoError() {
+  store.fetchData("cityName", "johannesburg");
+}
+
 onMounted(() => {
-  navigator.geolocation.getCurrentPosition(store.setPosition);
+  navigator.geolocation.getCurrentPosition(store.setPosition, handleGeoError);
 
   const days = [
     "Sunday",

@@ -21,6 +21,9 @@ export const useWeatherStore = defineStore("weather", {
     setDay(day) {
       this.day = day;
     },
+    setError(message) {
+      this.error = message;
+    },
     resetError() {
       this.error = null;
     },
