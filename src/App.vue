@@ -10,11 +10,11 @@
       </div>
     </div>
     <div v-else>
-      <h2>
+      <h2 class="text-center text-1xl mt-10 text-red-500 md:text-3xl">
         {{ store.error }}
       </h2>
     </div>
-    <div v-if="store.isFetching">
+    <div class="text-center text-lg md:text-2xl" v-if="store.isFetching">
       <p>Loading...</p>
     </div>
   </main>

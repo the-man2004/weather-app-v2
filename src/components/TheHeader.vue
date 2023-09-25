@@ -5,12 +5,12 @@
       @submit.prevent="searchCity"
     >
       <input
-        class="outline-none w-5/6 pl-2 placeholder-gray-500"
+        class="outline-none w-4/6 pl-2 placeholder-gray-500 md:w-3/4"
         type="text"
         placeholder="search city..."
         v-model.trim="cityName"
       />
-      <button class="w-1/6 bg-gray-300">search</button>
+      <button class="w-2/6 bg-gray-300 md:w-1/4">search</button>
     </form>
   </div>
 </template>
