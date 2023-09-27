@@ -1,28 +1,33 @@
 <template>
-  <main class="container mx-auto mb-10 px-5 max-w-3xl text-gray-500">
-    <div>
-      <TheHeader />
-    </div>
-    <div v-if="!store.isFetching && !store.error" class="weather">
+  <div class="bg-gray-200 h-screen" :class="bgColor">
+    <main class="container mx-auto mb-10 px-5 max-w-3xl" :class="textColor">
       <div>
-        <CurrentWeather />
-        <AllWeather />
+        <TheHeader />
       </div>
-    </div>
-    <div v-else>
-      <h2 class="text-center text-1xl mt-10 text-red-500 md:text-3xl">
-        {{ store.error }}
-      </h2>
-    </div>
-    <div class="text-center text-lg md:text-2xl" v-if="store.isFetching">
-      <p>Loading...</p>
-    </div>
-  </main>
+      <div v-if="!store.isFetching && !store.error" class="weather">
+        <div>
+          <CurrentWeather />
+          <AllWeather />
+        </div>
+      </div>
+      <div v-else>
+        <h2 class="text-center text-1xl mt-10 text-red-500 md:text-3xl">
+          {{ store.error }}
+        </h2>
+      </div>
+      <div class="text-center text-lg md:text-2xl" v-if="store.isFetching">
+        <p>Loading...</p>
+      </div>
+    </main>
+  </div>
 </template>
 
 <script setup>
 import { onMounted } from "vue";
 import { useWeatherStore } from "./stores/weatherStore";
+import { useUIStore } from "./stores/UIStore";
+
+import { computed } from "vue";
 
 import TheHeader from "./components/TheHeader.vue";
 import CurrentWeather from "./components/CurrentWeather.vue";
@@ -33,10 +38,18 @@ import AllWeather from "./components/AllWeather.vue";
 // HOW TO GET ICON <img src="http://openweathermap.org/img/w/01d.png" alt="" />
 
 const store = useWeatherStore();
+const UIStore = useUIStore();
 
 function handleGeoError() {
   store.fetchData("cityName", "johannesburg");
 }
+
+const bgColor = computed(() =>
+  UIStore.mode === "light" ? "bg-gray-200" : "bg-gray-800"
+);
+const textColor = computed(() =>
+  UIStore.mode === "light" ? "text-gray-500" : "text-gray-400"
+);
 
 onMounted(() => {
   navigator.geolocation.getCurrentPosition(store.setPosition, handleGeoError);
