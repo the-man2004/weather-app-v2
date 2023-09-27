@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-200 h-screen" :class="bgColor">
+  <div class="bg-gray-200 h-screen truncate" :class="bgColor">
     <main class="container mx-auto mb-10 px-5 max-w-3xl" :class="textColor">
       <div>
         <TheHeader />
@@ -52,8 +52,10 @@ const textColor = computed(() =>
 );
 
 onMounted(() => {
+  // Get user position
   navigator.geolocation.getCurrentPosition(store.setPosition, handleGeoError);
 
+  // Set current day
   const days = [
     "Sunday",
     "Monday",
@@ -66,9 +68,13 @@ onMounted(() => {
 
   const d = new Date();
   const day = days[d.getDay()];
-  console.log(day);
 
   store.setDay(day);
+
+  // Set color scheme in local storage
+  if (!localStorage.getItem("color-scheme")) {
+    localStorage.setItem("color-scheme", "light");
+  }
 });
 </script>
 
