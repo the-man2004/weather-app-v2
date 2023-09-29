@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 export const useWeatherStore = defineStore("weather", {
   state: () => {
     return {
+      units: localStorage.getItem("units") || "metric",
       latitude: null,
       longitude: null,
       isFetching: true,
@@ -27,7 +28,7 @@ export const useWeatherStore = defineStore("weather", {
     resetError() {
       this.error = null;
     },
-    async fetchData(mode = "coords", city = "london") {
+    async fetchData(mode = "coords", city = "johannesburg") {
       this.isFetching = true;
 
       let APIUrl;

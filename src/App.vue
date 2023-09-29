@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-gray-200 h-screen truncate" :class="bgColor">
-    <main class="container mx-auto mb-10 px-5 max-w-3xl" :class="textColor">
+  <div class="relative bg-gray-200 min-h-screen mb-0" :class="bgColor">
+    <main class="container mx-auto px-5 pb-10 max-w-3xl" :class="textColor">
       <div>
         <TheHeader />
       </div>
@@ -41,7 +41,7 @@ const store = useWeatherStore();
 const UIStore = useUIStore();
 
 function handleGeoError() {
-  store.fetchData("cityName", "johannesburg");
+  store.fetchData("cityName");
 }
 
 const bgColor = computed(() =>
@@ -74,6 +74,10 @@ onMounted(() => {
   // Set color scheme in local storage
   if (!localStorage.getItem("color-scheme")) {
     localStorage.setItem("color-scheme", "light");
+  }
+  // Set units of measurement
+  if (!localStorage.getItem("units")) {
+    localStorage.setItem("units", "metric");
   }
 });
 </script>

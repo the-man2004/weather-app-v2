@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 export const useUIStore = defineStore("UIstore", {
   state: () => {
     return {
-      colorScheme: localStorage.getItem("color-scheme"),
+      colorScheme: localStorage.getItem("color-scheme") || "dark",
     };
   },
   actions: {
