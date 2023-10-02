@@ -23,72 +23,74 @@
 
   <!-- Main modal -->
   <teleport to="#popups-and-modals">
-    <div
-      v-if="isModalOpen === true"
-      class="fixed top-16 inset-x-4 z-50 p-4 max-w-2xl mx-auto rounded-md"
-      :class="`${bgColor} ${textColor}`"
-    >
-      <div class="flex flex-row mb-8">
-        <p class="font-semibold text-xl md:text-2xl">Settings</p>
-        <!-- Close button -->
-        <svg
-          @click="toggleIsModalOpen"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-6 h-6 ml-auto cursor-pointer text-blue-400 md:w-8 md:h-8"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M6 18L18 6M6 6l12 12"
-          />
-        </svg>
+    <transition name="slide-fade">
+      <div
+        v-if="isModalOpen === true"
+        class="fixed top-16 inset-x-4 z-50 p-4 max-w-2xl mx-auto rounded-md"
+        :class="`${bgColor} ${textColor}`"
+      >
+        <div class="flex flex-row mb-8">
+          <p class="font-semibold text-xl md:text-2xl">Settings</p>
+          <!-- Close button -->
+          <svg
+            @click="toggleIsModalOpen"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6 ml-auto cursor-pointer text-blue-400 md:w-8 md:h-8"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </div>
+        <!--  -->
+        <div class="flex flex-col md:flex-row">
+          <figure class="sm:flex-1">
+            <figcaption class="mb-2 md:text-xl">Language</figcaption>
+            <ul class="ml-2 mb-5 text-sm md:text-md md:mb-0">
+              <li @click="changeLang('en')">English</li>
+              <li @click="changeLang('ar')">Arabic</li>
+              <li @click="changeLang('cz')">Czech</li>
+              <li @click="changeLang('el')">Greek</li>
+              <li @click="changeLang('Farsi')">Persian</li>
+              <li @click="changeLang('gl')">Galician</li>
+              <li @click="changeLang('hu')">Hungarian</li>
+              <li @click="changeLang('ja')">Japanese</li>
+              <li @click="changeLang('kr')">Korean</li>
+              <li @click="changeLang('la')">Latvian</li>
+              <li @click="changeLang('lt')">Lithuanian</li>
+              <li @click="changeLang('mk')">Macedonian</li>
+              <li @click="changeLang('sk')">Slovak</li>
+              <li @click="changeLang('sl')">Slovenian</li>
+              <li @click="changeLang('vi')">Vietnamese</li>
+            </ul>
+          </figure>
+          <figure class="sm:flex-1">
+            <figcaption class="mb-2 md:text-xl">Units</figcaption>
+            <ul class="ml-2 text-sm md:text-md">
+              <li @click="changeUnits('metric')">Celsius</li>
+              <li @click="changeUnits('imperial')">Fahrenheit</li>
+            </ul>
+          </figure>
+        </div>
       </div>
-
-      <!--  -->
-      <div class="flex flex-col md:flex-row">
-        <figure class="sm:flex-1">
-          <figcaption class="mb-2 md:text-xl">Language</figcaption>
-          <ul class="ml-2 mb-5 text-sm md:text-md md:mb-0">
-            <li @click="changeLang('en')">English</li>
-            <li @click="changeLang('ar')">Arabic</li>
-            <li @click="changeLang('cz')">Czech</li>
-            <li @click="changeLang('el')">Greek</li>
-            <li @click="changeLang('Farsi')">Persian</li>
-            <li @click="changeLang('gl')">Galician</li>
-            <li @click="changeLang('hu')">Hungarian</li>
-            <li @click="changeLang('ja')">Japanese</li>
-            <li @click="changeLang('kr')">Korean</li>
-            <li @click="changeLang('la')">Latvian</li>
-            <li @click="changeLang('lt')">Lithuanian</li>
-            <li @click="changeLang('mk')">Macedonian</li>
-            <li @click="changeLang('sk')">Slovak</li>
-            <li @click="changeLang('sl')">Slovenian</li>
-            <li @click="changeLang('vi')">Vietnamese</li>
-          </ul>
-        </figure>
-
-        <figure class="sm:flex-1">
-          <figcaption class="mb-2 md:text-xl">Units</figcaption>
-          <ul class="ml-2 text-sm md:text-md">
-            <li @click="changeUnits('metric')">Celsius</li>
-            <li @click="changeUnits('imperial')">Fahrenheit</li>
-          </ul>
-        </figure>
-      </div>
-    </div>
+    </transition>
   </teleport>
 
   <!-- Backdrop -->
   <teleport to="#popups-and-modals">
-    <div
-      @click="toggleIsModalOpen"
-      class="fixed top-0 left-0 right-0 bottom-0 w-full h-full bg-black opacity-30"
-      :class="{ hidden: isModalOpen === false }"
-    ></div>
+    <transition name="fade">
+      <div
+        @click="toggleIsModalOpen"
+        class="fixed top-0 left-0 right-0 bottom-0 w-full h-full bg-black opacity-30"
+        :class="{ hidden: isModalOpen === false }"
+      ></div>
+    </transition>
   </teleport>
 </template>
 
@@ -121,11 +123,38 @@ const textColor = computed(() =>
 );
 </script>
 
+<!-- Styling -->
 <style scoped>
 li {
   cursor: pointer;
 }
 li:hover {
   color: rgb(96 165 250 / 1);
+}
+
+/* modal animations */
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.8s;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+/* Backdrop animation */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.8s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
