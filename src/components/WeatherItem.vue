@@ -17,7 +17,7 @@ const props = defineProps({
 });
 const temp = computed(() => Math.round(props.info.main.temp));
 const icon = computed(() => {
-  const i = `http://openweathermap.org/img/w/${props.info.weather[0].icon}.png`;
+  const i = `http://openweathermap.org/img/wn/${props.info.weather[0].icon}@2x.png`;
   return i;
 });
 
