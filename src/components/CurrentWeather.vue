@@ -34,7 +34,7 @@ const humidity = computed(() => store.currentWeather.main.humidity);
 const wind = computed(() => Math.round(store.currentWeather.wind.speed));
 const icon = computed(
   () =>
-    `http://openweathermap.org/img/w/${store.currentWeather.weather[0].icon}.png`
+    `http://openweathermap.org/img/wn/${store.currentWeather.weather[0].icon}@2x.png`
 );
 // eslint-disable-next-line
 const imageUrl = computed(() => {
