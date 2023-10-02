@@ -97,8 +97,10 @@
 <script setup>
 import { ref } from "vue";
 import { computed } from "vue";
+import { useWeatherStore } from "@/stores/weatherStore";
 import { useUIStore } from "../stores/UIStore";
 
+const weatherStore = useWeatherStore();
 const UIStore = useUIStore();
 
 const isModalOpen = ref(false);
@@ -112,6 +114,12 @@ const changeLang = (lang) => {
 };
 
 const changeUnits = (unit) => {
+  if (weatherStore.weatherUnit !== unit) {
+    weatherStore.setUnits(unit);
+    toggleIsModalOpen();
+
+    weatherStore.fetchData("cityName", weatherStore.location.city);
+  }
   console.log(unit);
 };
 

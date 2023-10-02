@@ -9,7 +9,7 @@
       <img class="mx-auto w-1/4" :src="icon" alt="weather icon" />
 
       <div class="mb-3 md:mb-5">
-        <h3>{{ temp }}°C</h3>
+        <h3>{{ temp }}</h3>
         <p>Humidity: {{ humidity }}%</p>
         <p>Wind: {{ wind }} km/h</p>
         <!-- <img class="weather-img" :src="imageUrl" alt="" /> -->
@@ -29,7 +29,13 @@ import { computed } from "vue";
 
 const store = useWeatherStore();
 
-const temp = computed(() => Math.round(store.currentWeather.main.temp));
+const temp = computed(() => {
+  const roundedTemp = Math.round(store.currentWeather.main.temp);
+
+  return store.weatherUnit === "metric"
+    ? `${roundedTemp}°C`
+    : `${roundedTemp}°F`;
+});
 const humidity = computed(() => store.currentWeather.main.humidity);
 const wind = computed(() => Math.round(store.currentWeather.wind.speed));
 const icon = computed(

@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 export const useWeatherStore = defineStore("weather", {
   state: () => {
     return {
-      units: localStorage.getItem("units") || "metric",
+      tempUnit: localStorage.getItem("units") || "metric",
       latitude: null,
       longitude: null,
       isFetching: true,
@@ -18,6 +18,11 @@ export const useWeatherStore = defineStore("weather", {
       this.longitude = position.coords.longitude;
 
       this.fetchData();
+    },
+    setUnits(unit) {
+      localStorage.setItem("units", unit);
+
+      this.tempUnit = unit;
     },
     setDay(day) {
       this.day = day;
@@ -34,11 +39,11 @@ export const useWeatherStore = defineStore("weather", {
       let APIUrl;
 
       if (mode === "coords") {
-        APIUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${this.latitude}&lon=${this.longitude}&cnt=8&appid=04400c94c3fa39734684083c69ac10aa&units=metric`;
+        APIUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${this.latitude}&lon=${this.longitude}&cnt=8&appid=04400c94c3fa39734684083c69ac10aa&units=${this.tempUnit}`;
       }
 
       if (mode === "cityName") {
-        APIUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&cnt=8&appid=04400c94c3fa39734684083c69ac10aa&units=metric`;
+        APIUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&cnt=8&appid=04400c94c3fa39734684083c69ac10aa&units=${this.tempUnit}`;
       }
 
       try {
@@ -46,7 +51,7 @@ export const useWeatherStore = defineStore("weather", {
 
         if (!response.ok) {
           console.log(response);
-          throw new Error();
+          throw new Error(response.statusText);
         }
 
         const responseData = await response.json();
@@ -84,6 +89,9 @@ export const useWeatherStore = defineStore("weather", {
     },
     weatherCondition: (state) => {
       return state.weatherInfo.list[0].weather[0].description;
+    },
+    weatherUnit: (state) => {
+      return state.tempUnit;
     },
   },
 });
