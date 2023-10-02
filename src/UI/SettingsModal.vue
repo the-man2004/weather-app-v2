@@ -26,7 +26,7 @@
     <transition name="slide-fade">
       <div
         v-if="isModalOpen === true"
-        class="fixed top-16 inset-x-4 z-50 p-4 max-w-2xl mx-auto rounded-md"
+        class="absolute top-16 inset-x-4 z-50 p-8 max-w-2xl mx-auto rounded-md"
         :class="`${bgColor} ${textColor}`"
       >
         <div class="flex flex-row mb-8">
@@ -72,7 +72,7 @@
           </figure>
           <figure class="sm:flex-1">
             <figcaption class="mb-2 md:text-xl">Units</figcaption>
-            <ul class="ml-2 text-sm md:text-md">
+            <ul class="ml-2 mb-5 text-sm md:text-md">
               <li @click="changeUnits('metric')">Celsius</li>
               <li @click="changeUnits('imperial')">Fahrenheit</li>
             </ul>
@@ -105,6 +105,7 @@ const UIStore = useUIStore();
 
 const isModalOpen = ref(false);
 
+// Helper functions
 const toggleIsModalOpen = () => {
   isModalOpen.value = !isModalOpen.value;
 };
@@ -120,9 +121,9 @@ const changeUnits = (unit) => {
 
     weatherStore.fetchData("cityName", weatherStore.location.city);
   }
-  console.log(unit);
 };
 
+// Computed properties
 const bgColor = computed(() =>
   UIStore.colorScheme === "light" ? "bg-gray-200" : "bg-gray-800"
 );

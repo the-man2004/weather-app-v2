@@ -11,7 +11,7 @@
       <div class="mb-3 md:mb-5">
         <h3>{{ temp }}</h3>
         <p>Humidity: {{ humidity }}%</p>
-        <p>Wind: {{ wind }} km/h</p>
+        <p>Wind: {{ wind }}</p>
         <!-- <img class="weather-img" :src="imageUrl" alt="" /> -->
       </div>
       <div>
@@ -37,7 +37,13 @@ const temp = computed(() => {
     : `${roundedTemp}°F`;
 });
 const humidity = computed(() => store.currentWeather.main.humidity);
-const wind = computed(() => Math.round(store.currentWeather.wind.speed));
+const wind = computed(() => {
+  const windSpeed = Math.round(store.currentWeather.wind.speed);
+
+  return store.weatherUnit === "metric"
+    ? `${windSpeed} meter/sec`
+    : `${windSpeed} miles/hour`;
+});
 const icon = computed(
   () =>
     `http://openweathermap.org/img/wn/${store.currentWeather.weather[0].icon}@2x.png`
