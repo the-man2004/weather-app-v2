@@ -79,6 +79,11 @@ onMounted(() => {
   if (!localStorage.getItem("units")) {
     localStorage.setItem("units", "metric");
   }
+
+  // Set language
+  if (!localStorage.getItem("lang")) {
+    localStorage.setItem("lang", "en");
+  }
 });
 </script>
 

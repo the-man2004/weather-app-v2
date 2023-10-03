@@ -53,28 +53,68 @@
           <figure class="sm:flex-1">
             <figcaption class="mb-2 md:text-xl">Language</figcaption>
             <ul class="ml-2 mb-5 text-sm md:text-md md:mb-0">
-              <li @click="changeLang('en')">English</li>
-              <li @click="changeLang('ar')">Arabic</li>
-              <li @click="changeLang('cz')">Czech</li>
-              <li @click="changeLang('el')">Greek</li>
-              <li @click="changeLang('Farsi')">Persian</li>
-              <li @click="changeLang('gl')">Galician</li>
-              <li @click="changeLang('hu')">Hungarian</li>
-              <li @click="changeLang('ja')">Japanese</li>
-              <li @click="changeLang('kr')">Korean</li>
-              <li @click="changeLang('la')">Latvian</li>
-              <li @click="changeLang('lt')">Lithuanian</li>
-              <li @click="changeLang('mk')">Macedonian</li>
-              <li @click="changeLang('sk')">Slovak</li>
-              <li @click="changeLang('sl')">Slovenian</li>
-              <li @click="changeLang('vi')">Vietnamese</li>
+              <li :class="{ 'text-blue-400': weatherStore.lang === 'en' }">
+                <button @click="changeLang('en')">English</button>
+              </li>
+              <li :class="{ 'text-blue-400': weatherStore.lang === 'ar' }">
+                <button @click="changeLang('ar')">Arabic</button>
+              </li>
+              <li :class="{ 'text-blue-400': weatherStore.lang === 'cz' }">
+                <button @click="changeLang('cz')">Czech</button>
+              </li>
+              <li :class="{ 'text-blue-400': weatherStore.lang === 'el' }">
+                <button @click="changeLang('el')">Greek</button>
+              </li>
+              <li :class="{ 'text-blue-400': weatherStore.lang === 'Farsi' }">
+                <button @click="changeLang('Farsi')">Persian</button>
+              </li>
+              <li :class="{ 'text-blue-400': weatherStore.lang === 'gl' }">
+                <button @click="changeLang('gl')">Galician</button>
+              </li>
+              <li :class="{ 'text-blue-400': weatherStore.lang === 'hu' }">
+                <button @click="changeLang('hu')">Hungarian</button>
+              </li>
+              <li :class="{ 'text-blue-400': weatherStore.lang === 'ja' }">
+                <button @click="changeLang('ja')">Japanese</button>
+              </li>
+              <li :class="{ 'text-blue-400': weatherStore.lang === 'kr' }">
+                <button @click="changeLang('kr')">Korean</button>
+              </li>
+              <li :class="{ 'text-blue-400': weatherStore.lang === 'la' }">
+                <button @click="changeLang('la')">Latvian</button>
+              </li>
+              <li :class="{ 'text-blue-400': weatherStore.lang === 'lt' }">
+                <button @click="changeLang('lt')">Lithuanian</button>
+              </li>
+              <li :class="{ 'text-blue-400': weatherStore.lang === 'mk' }">
+                <button @click="changeLang('mk')">Macedonian</button>
+              </li>
+              <li :class="{ 'text-blue-400': weatherStore.lang === 'sk' }">
+                <button @click="changeLang('sk')">Slovak</button>
+              </li>
+              <li :class="{ 'text-blue-400': weatherStore.lang === 'sl' }">
+                <button @click="changeLang('sl')">Slovenian</button>
+              </li>
+              <li :class="{ 'text-blue-400': weatherStore.lang === 'vi' }">
+                <button @click="changeLang('vi')">Vietnamese</button>
+              </li>
             </ul>
           </figure>
           <figure class="sm:flex-1">
             <figcaption class="mb-2 md:text-xl">Units</figcaption>
             <ul class="ml-2 mb-5 text-sm md:text-md">
-              <li @click="changeUnits('metric')">Celsius</li>
-              <li @click="changeUnits('imperial')">Fahrenheit</li>
+              <li
+                :class="{ 'text-blue-400': weatherStore.tempUnit === 'metric' }"
+              >
+                <button @click="changeUnits('metric')">Celsius</button>
+              </li>
+              <li
+                :class="{
+                  'text-blue-400': weatherStore.tempUnit === 'imperial',
+                }"
+              >
+                <button @click="changeUnits('imperial')">Fahrenheit</button>
+              </li>
             </ul>
           </figure>
         </div>
@@ -111,7 +151,12 @@ const toggleIsModalOpen = () => {
 };
 
 const changeLang = (lang) => {
-  console.log(lang);
+  if (weatherStore.lang !== lang) {
+    weatherStore.setLang(lang);
+    toggleIsModalOpen();
+
+    weatherStore.fetchData("cityName", weatherStore.location.city);
+  }
 };
 
 const changeUnits = (unit) => {

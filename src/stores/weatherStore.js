@@ -4,6 +4,7 @@ export const useWeatherStore = defineStore("weather", {
   state: () => {
     return {
       tempUnit: localStorage.getItem("units") || "metric",
+      lang: localStorage.getItem("lang") || "en",
       latitude: null,
       longitude: null,
       isFetching: true,
@@ -24,6 +25,11 @@ export const useWeatherStore = defineStore("weather", {
 
       this.tempUnit = unit;
     },
+    setLang(lang) {
+      localStorage.setItem("lang", lang);
+
+      this.lang = lang;
+    },
     setDay(day) {
       this.day = day;
     },
@@ -39,11 +45,11 @@ export const useWeatherStore = defineStore("weather", {
       let APIUrl;
 
       if (mode === "coords") {
-        APIUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${this.latitude}&lon=${this.longitude}&cnt=8&appid=04400c94c3fa39734684083c69ac10aa&units=${this.tempUnit}`;
+        APIUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${this.latitude}&lon=${this.longitude}&cnt=8&appid=04400c94c3fa39734684083c69ac10aa&units=${this.tempUnit}&lang=${this.lang}`;
       }
 
       if (mode === "cityName") {
-        APIUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&cnt=8&appid=04400c94c3fa39734684083c69ac10aa&units=${this.tempUnit}`;
+        APIUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&cnt=8&appid=04400c94c3fa39734684083c69ac10aa&units=${this.tempUnit}&lang=${this.lang}`;
       }
 
       try {
