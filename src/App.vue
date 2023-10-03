@@ -46,7 +46,7 @@ function handleGeoError() {
 }
 
 const bgColor = computed(() =>
-  UIStore.mode === "light" ? "bg-gray-200" : "bg-gray-800"
+  UIStore.mode === "light" ? "bg-blue-200" : "bg-gray-800"
 );
 const textColor = computed(() =>
   UIStore.mode === "light" ? "text-gray-500" : "text-gray-400"
@@ -104,6 +104,7 @@ svg {
   background-repeat: no-repeat;
 }
 
+/* loading spinner */
 .spinner {
   border: 8px solid #f3f3f3; /* Light grey */
   border-top: 8px solid #3498db; /* Blue */
